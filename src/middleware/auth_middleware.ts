@@ -1,4 +1,3 @@
-import { Request } from "express";
 import jwt, { Secret, JwtPayload } from "jsonwebtoken";
 
 interface TokenPayload extends JwtPayload {
@@ -23,17 +22,8 @@ export const generateToken = (
     }
 };
 
-export const verifyToken = (req: Request): TokenPayload => {
+export const verifyToken = (token: string): TokenPayload => {
     try {
-        let token: string | undefined;
-
-        if (req.headers.authorization?.startsWith("Bearer")) {
-            token = req.headers.authorization.split(" ")[1];
-        }
-
-        if (!token) {
-            throw new Error("Token is missing");
-        }
         const decoded = jwt.verify(token, JWT_SECRET);
 
         // Type guard to ensure the decoded value matches our TokenPayload
