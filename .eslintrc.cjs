@@ -1,4 +1,5 @@
 /* eslint-env node */
+
 module.exports = {
     extends: [
         "eslint:recommended",
@@ -16,5 +17,6 @@ module.exports = {
         "no-console": "error",
         "dot-notation": "error",
         "@typescript-eslint/require-await": "off",
+        "@typescript-eslint/no-explicit-any": "off",
     },
 };
