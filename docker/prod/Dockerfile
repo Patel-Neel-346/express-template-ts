@@ -1,4 +1,4 @@
-FROM node:18-alpine as builder
+FROM node:18-alpine AS builder
 
 WORKDIR /app
 
@@ -10,8 +10,7 @@ COPY . .
 
 RUN npm run build
 
-
-FROM node:18-alpine as production
+FROM node:18-alpine AS production
 
 ENV NODE_ENV=production
 
@@ -19,19 +18,10 @@ WORKDIR /app
 
 COPY package*.json ./
 
-RUN npm ci --ignore-scripts
+RUN npm ci --omit=dev --ignore-scripts
 
-COPY --from=builder /app/dist ./
+COPY --from=builder /app/dist ./dist
 
-EXPOSE 5500
+EXPOSE 5502
 
-CMD ["node", "src/server.js"]
-
-
-
-
-
-
-
-
-
+CMD ["node", "dist/main.js"]

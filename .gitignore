@@ -136,4 +136,5 @@ dist
 .pnp.*
 
 logs
-config
+# legacy root config folder (not src/config)
+/config
